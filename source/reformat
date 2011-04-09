@@ -1,0 +1,1 @@
+astyle --style=java --indent=spaces=3 --brackets=attach --indent-switches --indent-col1-comments --min-conditional-indent=6 --pad-header --break-closing-brackets --break-elseifs --convert-tabs --align-pointer=name --keep-one-line-statements --add-brackets --verbose *.c

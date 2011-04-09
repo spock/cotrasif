@@ -1,0 +1,73 @@
+C, C++, Python, PHP
+===================
+References:
+http://en.wikibooks.org/wiki/C%2B%2B_Programming/Code_Style
+http://en.wikipedia.org/wiki/Indent_style
+
+
+!!! IMPORTANT !!!
+C/C++: best/recommended method to format your C source files is by using astyle with these options:
+astyle --style=java --indent=spaces=3 --brackets=attach --indent-switches --indent-col1-comments \
+       --min-conditional-indent=6 --pad-header --break-closing-brackets --break-elseifs --convert-tabs \
+       --align-pointer=name --keep-one-line-statements --add-brackets --verbose *.c
+Or just cd source && ./reformat (astyle is required in PATH).
+!!! EOF IMPORTANT !!!
+
+
+C: adhere to C99 standard.
+
+Tab symbols allowed: no.
+Indentation (horizontal spacing): 3 spaces.
+Indentation of continued lines: either 3 spaces, or from the first line's opening symbol.
+Empty lines (vertical spacing): try to avoid; do not use lines with whitespace-only symbols.
+Use of braces when wrapping single statement: obligatory, with 1 exception:
+- if (DEBUG) single-line statements can be added without braces.
+
+Variables and functions naming:
+- do not start with a capital, an underscore, or a digit
+- for long variables, underscore separation should be used (I find camelStyle harder to read than under_style)
+- use descriptive and not cryptic variable/function names; use short names only for very limited (<10 LOC) scopes
+- don't use anything akin to reserved keywords (e.g. "new", which is permitted in C99 but is a C++ reserved keyword)
+
+Constants naming:
+- use ALL_CAPS style, do not start with a digit or an underscore
+
+Spacing:
+- put spaces around binary operators, and between function arguments
+- add a space before an opening brace '{'
+- put a space between function name and left opening bracket '(' only when declaring function
+
+Comments:
+- each comment should deliver one (atomic) idea
+- start each comment with a capital, end with a dot - like a sentence
+- comments should answer questions "Why?", "For what reason?", not "Did what?"
+- comments should deliver an imperative form of the idea: "Free memory." instead of "Frees memory."
+
+
+Example
+
+int main (int argc, char *argv[]) {
+   while (x == y) {
+      something(&x);
+      somethingelse(x, &y);
+      if (some_error) {
+         // Correct erroneous user-supplied data.
+         x = do_correct(x);
+      }
+      else {
+         y = do_incorrect(x + x * y);
+         continue_as_usual(x, y, argc);
+      }
+   }
+   // Final cleanup is required.
+   finalthing(&y);
+   return y;
+}
+
+DEBUG
+
+We have 4 debug levels:
+- no debug: DEBUG is not defined on the compile line (see source/make script)
+- normal: DEBUG=1
+- verbose: DEBUG=2
+- ultra-verbose: DEBUG=3
